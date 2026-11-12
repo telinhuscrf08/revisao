@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Controle de estoque</title>
+</head>
+<body>
+
+    <h1>Controle de estoque</h1>
+
+    <input type="text" id="nome" placeholder="Produto">
+    <input type="number" id="quantidade" placeholder="Quantidade">
+    <input type="number" id="preco" placeholder="Preço">
+
+    <button onclick="cadastrar()">Cadastrar</button>
+
+    <ul id="lista"></ul>
+
+    <p id="total">Valor total: R$ 0,00</p>
+
+    <script>
+        function cadastrar() {
+            let nome = document.getElementById("nome").value;
+            let quantidade = Number(document.getElementById("quantidade").value);
+            let preco = Number(document.getElementById("preco").value);
+
+            if (nome.trim() === "" ||
+                document.getElementById("quantidade").value === "" ||
+                document.getElementById("preco").value === "" ||
+                quantidade < 0 || preco < 0) {
+
+                alert("Preencha os campos corretamente!");
+                return;
+            }
+
+            let valor = quantidade * preco;
+
+            let li = document.createElement("li");
+
+            li.dataset.valor = valor;
+
+            li.textContent = nome + " - Quantidade: " + quantidade +
+                " - Preço: R$ " + preco.toFixed(2) +
+                " - Subtotal: R$ " + valor.toFixed(2) + " ";
+
+            let excluir = document.createElement("button");
+            excluir.textContent = "Excluir";
+
+            excluir.onclick = function() {
+                li.remove();
+                calcularTotal();
+            };
+
+            li.appendChild(excluir);
+
+            document.getElementById("lista").appendChild(li);
+
+            document.getElementById("nome").value = "";
+            document.getElementById("quantidade").value = "";
+            document.getElementById("preco").value = "";
+
+            calcularTotal();
+        }
+
+        function calcularTotal() {
+            let produtos = document.querySelectorAll("#lista li");
+
+            let soma = 0;
+
+            for (let i = 0; i < produtos.length; i++) {
+                soma += Number(produtos[i].dataset.valor);
+            }
+
+            document.getElementById("total").textContent =
+                "Valor total: R$ " + soma.toFixed(2);
+        }
+    </script>
+
+</body>
+</html>

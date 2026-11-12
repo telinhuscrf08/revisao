@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Controle de notas</title>
+</head>
+<body>
+
+    <h1>Controle de notas</h1>
+
+    <input type="text" id="aluno" placeholder="Nome do aluno">
+    <input type="number" id="nota" placeholder="Nota">
+
+    <button onclick="adicionar()">Adicionar</button>
+
+    <ul id="lista"></ul>
+
+    <p id="media">Média: 0</p>
+
+    <script>
+        function adicionar() {
+            let nome = document.getElementById("aluno").value;
+            let nota = Number(document.getElementById("nota").value);
+
+            if (nome.trim() === "" || document.getElementById("nota").value === "" || nota < 0 || nota > 10) {
+                alert("Preencha os campos corretamente!");
+                return;
+            }
+
+            let situacao;
+
+            if (nota >= 6) {
+                situacao = "Aprovado";
+            } else {
+                situacao = "Reprovado";
+            }
+
+            let li = document.createElement("li");
+
+            li.dataset.nota = nota;
+
+            li.textContent = nome + " - Nota: " + nota + " - " + situacao + " ";
+
+            let excluir = document.createElement("button");
+            excluir.textContent = "Excluir";
+
+            excluir.onclick = function() {
+                li.remove();
+                calcularMedia();
+            };
+
+            li.appendChild(excluir);
+
+            document.getElementById("lista").appendChild(li);
+
+            document.getElementById("aluno").value = "";
+            document.getElementById("nota").value = "";
+
+            calcularMedia();
+        }
+
+        function calcularMedia() {
+            let alunos = document.querySelectorAll("#lista li");
+
+            let soma = 0;
+
+            for (let i = 0; i < alunos.length; i++) {
+                soma += Number(alunos[i].dataset.nota);
+            }
+
+            let media = 0;
+
+            if (alunos.length > 0) {
+                media = soma / alunos.length;
+            }
+
+            document.getElementById("media").textContent =
+                "Média: " + media.toFixed(2);
+        }
+    </script>
+
+</body>
+</html>

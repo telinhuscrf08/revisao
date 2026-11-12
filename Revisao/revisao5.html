@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de compras</title>
+</head>
+<body>
+
+    <h1>Lista de compras</h1>
+
+    <input type="text" id="produto" placeholder="Produto">
+    <button onclick="adicionar()">Adicionar</button>
+
+    <ul id="lista"></ul>
+
+    <script>
+        function adicionar() {
+            let nome = document.getElementById("produto").value;
+
+            if (nome.trim() === "") {
+                alert("Digite um produto!");
+                return;
+            }
+
+            let li = document.createElement("li");
+
+            let texto = document.createElement("span");
+            texto.textContent = nome;
+
+            let comprar = document.createElement("button");
+            comprar.textContent = "Comprado";
+
+            comprar.onclick = function() {
+                texto.style.textDecoration = "line-through";
+                texto.style.color = "gray";
+            };
+
+            let excluir = document.createElement("button");
+            excluir.textContent = "Excluir";
+
+            excluir.onclick = function() {
+                li.remove();
+            };
+
+            li.appendChild(texto);
+            li.appendChild(comprar);
+            li.appendChild(excluir);
+
+            document.getElementById("lista").appendChild(li);
+
+            document.getElementById("produto").value = "";
+        }
+    </script>
+
+</body>
+</html>

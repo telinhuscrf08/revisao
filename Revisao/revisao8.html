@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Galeria de imagens</title>
+</head>
+<body>
+
+    <h1>Galeria de imagens</h1>
+
+    <img src="imagem1.jpg.jpg" width="100">
+    <button onclick="mostrar('imagem1.jpg', 'Imagem 1')">Selecionar</button>
+
+    <img src="Flamengo 2016.jpg" width="100">
+    <button onclick="mostrar('imagem2.jpg', 'Imagem 2')">Selecionar</button>
+
+    <img src="mclovin.jpg" width="100">
+    <button onclick="mostrar('imagem3.jpg', 'Imagem 3')">Selecionar</button>
+
+    <h2>Imagem selecionada:</h2>
+
+    <img id="imagemGrande" width="300">
+
+    <p id="nome"></p>
+
+    <script>
+        function mostrar(caminho, nome) {
+            document.getElementById("imagemGrande").src = caminho;
+
+            document.getElementById("nome").textContent = nome;
+        }
+    </script>
+
+</body>
+</html>
