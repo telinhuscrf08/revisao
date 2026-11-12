@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Lista de nomes</h1>
+    <input type="text" id="nome" placeholder="campo de texto">
+    <button onclick="adicionar()" id="btnAdd">Adicionar</button>
+    <ul id="lista"></ul>
+    <script>
+        function btnAdd() {
+            let nome = document.getElementById('nome').value;
+            if (nome === "") {
+                window.alert("preencha");
+            } else {
+                let item = document.createElement("li")
+                item.textContent = nome;
+                document.getElementById('lista').appendChild('item');
+                document.getElementById('nome').value = "";
+            }
+        }
+    </script>
+</body>
+
+</html>

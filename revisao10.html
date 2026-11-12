@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gerenciador de tarefas</title>
+</head>
+<body>
+
+    <h1>Gerenciador de tarefas</h1>
+
+    <input type="text" id="tarefa" placeholder="Digite uma tarefa">
+    <button onclick="adicionar()">Adicionar</button>
+
+    <ul id="lista"></ul>
+
+    <p id="total">Total de tarefas: 0</p>
+    <p id="concluidas">Concluídas: 0</p>
+    <p id="pendentes">Pendentes: 0</p>
+
+    <script>
+        function adicionar() {
+            let nome = document.getElementById("tarefa").value;
+
+            if (nome.trim() === "") {
+                alert("Digite uma tarefa!");
+                return;
+            }
+
+            let li = document.createElement("li");
+
+            li.dataset.concluida = "nao";
+
+            li.textContent = nome + " ";
+
+            let concluir = document.createElement("button");
+            concluir.textContent = "Concluir";
+
+            concluir.onclick = function() {
+                li.dataset.concluida = "sim";
+                li.style.textDecoration = "line-through";
+
+                atualizar();
+            };
+
+            let excluir = document.createElement("button");
+            excluir.textContent = "Excluir";
+
+            excluir.onclick = function() {
+                li.remove();
+                atualizar();
+            };
+
+            li.appendChild(concluir);
+            li.appendChild(excluir);
+
+            document.getElementById("lista").appendChild(li);
+
+            document.getElementById("tarefa").value = "";
+
+            atualizar();
+        }
+
+        function atualizar() {
+            let tarefas = document.querySelectorAll("#lista li");
+
+            let concluidas = 0;
+            let pendentes = 0;
+
+            for (let i = 0; i < tarefas.length; i++) {
+                if (tarefas[i].dataset.concluida === "sim") {
+                    concluidas++;
+                } else {
+                    pendentes++;
+                }
+            }
+
+            document.getElementById("total").textContent =
+                "Total de tarefas: " + tarefas.length;
+
+            document.getElementById("concluidas").textContent =
+                "Concluídas: " + concluidas;
+
+            document.getElementById("pendentes").textContent =
+                "Pendentes: " + pendentes;
+        }
+    </script>
+
+</body>
+</html>
