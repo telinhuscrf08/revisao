@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <label>Digite sua Idade</label>
+    <input type="number" id="idade">
+    <button onclick="verificar()">Verificar</button>
+    <p id="resultado"></p>
+    <button onclick="reiniciar()" style="display:none" id="reiniciar">reiniciar</button>
+</body>
+<script>
+
+    function verificar() {
+        let idade = document.getElementById("idade").value;
+        if (idade == "") {
+            document.getElementById("resultado").textContent = "digita aí chefe tmj";
+        } else if (idade => 18) {
+            document.getElementById("resultado").textContent = "ja pode ser preso!!!";
+        } else {
+            document.getElementById("resultado").textContent = "bebe ainda po"
+        }
+        document.getElementById("reiniciar").style.display = "block";
+    }
+    function reiniciar() {
+        let idade = document.getElementById("idade").textContent = "";
+    }
+</script>
+
+</html>
